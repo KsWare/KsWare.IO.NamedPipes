@@ -44,7 +44,6 @@ namespace KsWare.IO.NamedPipes.Tests.Internal {
 		[TestMethod]
 		public void IncreaseNumberOfServiceInstances1And2() {
 			var pipeName = Helper.CreatePipeName();
-			var max      = NamedPipeServerStream.MaxAllowedServerInstances;
 			var streams1 = new NamedPipeServerStreams(pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte,
 				PipeOptions.Asynchronous);
 
@@ -58,7 +57,6 @@ namespace KsWare.IO.NamedPipes.Tests.Internal {
 		[TestMethod]
 		public void IncreaseNumberOfServiceInstances1CloseAnd2() {
 			var pipeName = Helper.CreatePipeName();
-			var max      = NamedPipeServerStream.MaxAllowedServerInstances;
 			var streams1 = new NamedPipeServerStreams(pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte,
 				PipeOptions.Asynchronous);
 			streams1.Dispose();
