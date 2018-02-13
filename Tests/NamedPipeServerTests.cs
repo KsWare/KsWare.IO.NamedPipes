@@ -29,6 +29,27 @@ namespace KsWare.IO.NamedPipes.Tests {
 			}
 		}
 
-		
+		[TestMethod]
+		public void StartServer() {
+
+			string          pipeName = nameof(StartServer);
+			NamedPipeServer Server;
+
+			try {
+				Server = new NamedPipeServer(pipeName, 1, 1, (sender, messageArgs) => {
+					Debug.WriteLine(messageArgs.Request);
+					messageArgs.Response = "Echo";
+				});
+
+			}
+			catch (Exception ex) {
+				Debug.WriteLine(ex);
+			}
+			finally {
+				Server = null;
+			}
+		}
+
+
 	}
 }
