@@ -14,18 +14,13 @@ using KsWare.IO.NamedPipes;
 [assembly: ComVisible(false)]
 [assembly: Guid("378cac5b-1f20-4278-a129-9a9ce5243c7c")]
 
-[assembly: AssemblyVersion(AssemblyInfo.Version)]
-[assembly: AssemblyFileVersion(AssemblyInfo.Version)]
-[assembly: AssemblyInformationalVersion(AssemblyInfo.Version + AssemblyInfo.PreVersion)]
+[assembly: AssemblyVersion("0.1.0")]
 
 // ReSharper disable once CheckNamespace
 namespace KsWare.IO.NamedPipes {
 
 	public static class AssemblyInfo {
 
-		public const string Version = "1.0.0";
-
-		public const string PreVersion = "-beta";
 	}
 
 }

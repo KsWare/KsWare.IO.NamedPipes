@@ -11,6 +11,8 @@
     <AssemblyName>KsWare.IO.NamedPipes</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,6 +54,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>KsWare.NuGet.PackageBuilder.exe -pp $(ProjectPath) -cn $(ConfigurationName) -pn $(PlatformName) -tp $(TargetPath)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="packages\KsWare.NuGet.PackageBuilder.0.1.0-CI00007\build\KsWare.NuGet.PackageBuilder.targets" Condition="Exists('packages\KsWare.NuGet.PackageBuilder.0.1.0-CI00007\build\KsWare.NuGet.PackageBuilder.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\KsWare.NuGet.PackageBuilder.0.1.0-CI00007\build\KsWare.NuGet.PackageBuilder.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\KsWare.NuGet.PackageBuilder.0.1.0-CI00007\build\KsWare.NuGet.PackageBuilder.targets'))" />
+  </Target>
 </Project>
