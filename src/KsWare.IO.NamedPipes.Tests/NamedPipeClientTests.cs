@@ -46,7 +46,7 @@ namespace KsWare.IO.NamedPipes.Tests {
 			server.Dispose();
 		}
 
-		[TestMethod]
+		[TestMethod,TestCategory("LocalOnly")]
 		public void StartEchoServerAndClientAndSend() {
 			string pipeName = nameof(StartEchoServerAndClientAndSend);
 			Process p=null;
@@ -70,10 +70,8 @@ namespace KsWare.IO.NamedPipes.Tests {
 			}
 		}
 
-		[TestMethod]
+		[TestMethod,TestCategory("LocalOnly")]
 		public void StartEchoServerAndMultipleClientsAndSend() {
-			
-
 			string  pipeName = nameof(StartEchoServerAndMultipleClientsAndSend);
 			Process p        = null;
 			try {
