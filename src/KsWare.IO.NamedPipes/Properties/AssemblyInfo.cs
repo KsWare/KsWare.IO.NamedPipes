@@ -14,9 +14,9 @@ using KsWare.IO.NamedPipes;
 [assembly: ComVisible(false)]
 [assembly: Guid("378cac5b-1f20-4278-a129-9a9ce5243c7c")]
 
-[assembly: AssemblyVersion("0.1.0")]
-[assembly: AssemblyFileVersion("0.1.0")]
-[assembly: AssemblyInformationalVersion("0.1.0")]
+[assembly: AssemblyVersion("0.1.1")]
+[assembly: AssemblyFileVersion("0.1.1")]
+[assembly: AssemblyInformationalVersion("0.1.1")]
 
 // ReSharper disable once CheckNamespace
 namespace KsWare.IO.NamedPipes {
