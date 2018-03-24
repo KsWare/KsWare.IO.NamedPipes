@@ -3,11 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KsWare.IO.NamedPipes", "KsWare.IO.NamedPipes.csproj", "{378CAC5B-1F20-4278-A129-9A9CE5243C7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KsWare.IO.NamedPipes", "KsWare.IO.NamedPipes\KsWare.IO.NamedPipes.csproj", "{378CAC5B-1F20-4278-A129-9A9CE5243C7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NamedPipeDemo", "DemoApp\NamedPipeDemo.csproj", "{4FD0188F-DC6F-4DF1-83F4-538C23A96110}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NamedPipeDemo", "KsWare.IO.NamedPipes.DemoApp\NamedPipeDemo.csproj", "{4FD0188F-DC6F-4DF1-83F4-538C23A96110}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{C8A14450-8F86-4B41-8649-D02487F22487}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "KsWare.IO.NamedPipes.Tests\Tests.csproj", "{C8A14450-8F86-4B41-8649-D02487F22487}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{47C247AC-E6F3-4503-B6E7-9664FCFCE99F}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\ChangeLog.md = ..\ChangeLog.md
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

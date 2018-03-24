@@ -6,14 +6,14 @@
         <title>$title$</title>
         <authors>$author$</authors>
         <owners>$author$</owners>
-        <licenseUrl>https://github.com/KsWare/$id$/licence</licenseUrl>
-        <projectUrl>https://github.com/KsWare/$id$</projectUrl>
-        <iconUrl>https://github.com/KsWare/$id$/icon.ico</iconUrl>
+        <licenseUrl>https://github.com/$author$/$id$/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/$author$/$id$</projectUrl>
+        <iconUrl>https://raw.githubusercontent.com/$author$/$id$/master/icon.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>$description$</description>
 		<developmentDependency>false</developmentDependency>
-        <releaseNotes></releaseNotes>
-        <copyright>Copyright 2018 by KsWare. All rights reserved.</copyright>
-        <tags>KsWare IO namedpipes dot-net library</tags>
+        <releaseNotes>https://raw.githubusercontent.com/$author$/$id$/master/ChangeLog.md</releaseNotes>
+        <copyright>Copyright 2018 by $author$. All rights reserved.</copyright>
+        <tags>IO namedpipes dot-net library $author$</tags>
     </metadata>
 </package>

@@ -59,11 +59,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DemoApp\NamedPipeDemo.csproj">
+    <ProjectReference Include="..\KsWare.IO.NamedPipes.DemoApp\NamedPipeDemo.csproj">
       <Project>{4fd0188f-dc6f-4df1-83f4-538c23a96110}</Project>
       <Name>NamedPipeDemo</Name>
     </ProjectReference>
-    <ProjectReference Include="..\KsWare.IO.NamedPipes.csproj">
+    <ProjectReference Include="..\KsWare.IO.NamedPipes\KsWare.IO.NamedPipes.csproj">
       <Project>{378cac5b-1f20-4278-a129-9a9ce5243c7c}</Project>
       <Name>KsWare.IO.NamedPipes</Name>
     </ProjectReference>
