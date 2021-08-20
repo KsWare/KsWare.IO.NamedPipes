@@ -31,11 +31,11 @@ namespace KsWare.NamedPipeDemo {
 
 //			NamedPipeClientTests.StartEchoServerAndMultipleClientsAndSend();
 
-//            Console.WriteLine("Run Demo 1:");
-//            Demo1.Run();
-//            Console.WriteLine();
-//			Console.WriteLine("Run Demo 2:");
-//            Demo2.Run();
+            // Console.WriteLine("Run Demo 1:");
+            // Demo1.Run();
+            // Console.WriteLine();
+			Console.WriteLine("Run Demo 2:");
+            Demo2.Run();
 		}
 
 		public static Process StartEchoServer(string pipeName,
@@ -44,20 +44,29 @@ namespace KsWare.NamedPipeDemo {
 
 			var p = new Process {
 				StartInfo = new ProcessStartInfo {
-					FileName  = Assembly.GetExecutingAssembly().Location,
+					FileName  = GetExecutable(),
 					Arguments = $"StartEchoServer {pipeName} {maxNumberOfServerInstances} {initialNumberOfServerInstances}",
 					UseShellExecute = true,
 					Verb = "runas"
 				}
 			};
 			p.Start();
-			EventWaitHandle startedEvent = new EventWaitHandle(false, EventResetMode.ManualReset, $@"Global\{pipeName}");
+			var startedEvent = new EventWaitHandle(false, EventResetMode.ManualReset, $@"Global\{pipeName}");
 			startedEvent.WaitOne();
 			return p;
 		}
 
+		private static string GetExecutable() {
+			// in .net core Location returns a DLL
+			var file = Assembly.GetExecutingAssembly().Location;
+			if (file.EndsWith(".dll", StringComparison.InvariantCultureIgnoreCase))
+				file = file.Substring(0, file.Length - 4) + ".exe";
+			return file;
+		}
+
 		private static void EchoServer(string[] args) {
 			Console.WriteLine(@"EchoServer start");
+			// {pipeName} {maxNumberOfServerInstances} {initialNumberOfServerInstances}
 			var name = args.Length > 0 ? args[0] : "EchoServer";
 			var max = args.Length > 1 ? int.Parse(args[1]) : 1;
 			var num = args.Length > 2 ? int.Parse(args[2]) : 1;

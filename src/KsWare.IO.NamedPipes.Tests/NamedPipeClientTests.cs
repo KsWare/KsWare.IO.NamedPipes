@@ -9,25 +9,26 @@ namespace KsWare.IO.NamedPipes.Tests {
 
 	[TestClass]
 	public class NamedPipeClientTests {
+		// INFO: use GUID as pipe name, because method names are not unique with parallel multi platform tests
 
 		[TestMethod]
 		public void StartClientAndDisposeTest() {
-			string pipeName = nameof(StartClientAndDisposeTest);
+			var pipeName = Guid.NewGuid().ToString("N");
 			var client = new NamedPipeClient(pipeName);
 			client.Dispose();
 		}
 
 		[TestMethod]
 		public void StartClientAndConnectNoServer() {
-			string pipeName = nameof(StartClientAndConnectNoServer);
-			var    client   = new NamedPipeClient(pipeName);
+			var pipeName = Guid.NewGuid().ToString("N");
+			var client   = new NamedPipeClient(pipeName);
 			Assert.ThrowsException<TimeoutException>(() => client.Connect(100));
 			client.Dispose();
 		}
 
 		[TestMethod]
 		public void StartServerAndClientAndDispose() {
-			string pipeName = nameof(StartServerAndClientAndDispose);
+			var pipeName = Guid.NewGuid().ToString("N");
 			var server = new NamedPipeServer(pipeName, 1, 1,(s, e) => {});
 			server.Start();
 			var client = new NamedPipeClient(pipeName,100);
@@ -37,7 +38,7 @@ namespace KsWare.IO.NamedPipes.Tests {
 
 		[TestMethod]
 		public void StartServerAndClientAndSend() {
-			string pipeName = nameof(StartServerAndClientAndSend);
+			var pipeName = Guid.NewGuid().ToString("N");
 			var server = new NamedPipeServer(pipeName, 1, 1, (s, e) => e.Response = "Pong");
 			var client = new NamedPipeClient(pipeName, 100);
 			var response=client.SendRequest("Ping");
@@ -48,16 +49,22 @@ namespace KsWare.IO.NamedPipes.Tests {
 
 		[TestMethod,TestCategory("LocalOnly")]
 		public void StartEchoServerAndClientAndSend() {
-			string pipeName = nameof(StartEchoServerAndClientAndSend);
+			var pipeName = Guid.NewGuid().ToString("N");
 			Process p=null;
 			try {
-				p        = Program.StartEchoServer(pipeName, 4, 1);
-				var client   = new NamedPipeClient(pipeName, 100);
+				p = Program.StartEchoServer(pipeName, 4, 1);
+				var client = new NamedPipeClient(pipeName, 100);
 				var c = 0;
 				var m = 1000;
-				for (int i = 0; i < m; i++) {
-					var response = client.SendRequest("Ping");
-					if (response == "Pong") c++;
+				for (var i = 0; i < m; i++) {
+					try {
+						var response = client.SendRequest("Ping");
+						if (response == "Pong") c++;
+					}
+					catch (Exception ex) {
+						Console.WriteLine($"Exception at counter: {i}");
+						throw;
+					}
 				}
 				client.Dispose();
 				Assert.AreEqual(m, c);
@@ -72,12 +79,12 @@ namespace KsWare.IO.NamedPipes.Tests {
 
 		[TestMethod,TestCategory("LocalOnly")]
 		public void StartEchoServerAndMultipleClientsAndSend() {
-			string  pipeName = nameof(StartEchoServerAndMultipleClientsAndSend);
+			var pipeName = Guid.NewGuid().ToString("N");
 			Process p        = null;
 			try {
 				p = Program.StartEchoServer(pipeName, 4, 1);
 				var clients = new List<string>();
-				for (int i = 0; i < 4; i++) {
+				for (var i = 0; i < 4; i++) {
 					clients.Add($"Client#{i+1}");
 				}
 
@@ -94,7 +101,7 @@ namespace KsWare.IO.NamedPipes.Tests {
 				try {
 					var client = new NamedPipeClient(pipeName, 100);
 					var c      = 0;
-					for (int i = 0; i < count; i++) {
+					for (var i = 0; i < count; i++) {
 						var response = client.SendRequest("Ping");
 						if (response == "Pong") c++;
 					}

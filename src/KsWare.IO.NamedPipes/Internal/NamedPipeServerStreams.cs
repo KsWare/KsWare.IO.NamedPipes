@@ -150,16 +150,23 @@ namespace KsWare.IO.NamedPipes.Internal {
 		/// </summary>
 		/// <returns><c>true</c> if connected, <c>false</c> otherwise.</returns>
 		/// <remarks>
-		/// <para>the original NamedPipeServerStream does still block and does not return on Dispose. this workaround requieres PipeOptions.Asynchronous</para>
+		/// <para>the original NamedPipeServerStream does still block and does not return on Dispose. this workaround requires PipeOptions.Asynchronous</para>
 		/// </remarks>
 		public bool WaitForConnectionCancelable() {
 			// the original NamedPipeServerStream does still block and does not return on Dispose.
-			// but the workaround requieres PipeOptions.Asynchronous
+			// but the workaround requires PipeOptions.Asynchronous
 
 			var r = _readPipe.BeginWaitForConnection(null, null);
 			var w = _writePipe.BeginWaitForConnection(null, null);
-			WaitHandle.WaitAll(new[] {r.AsyncWaitHandle, w.AsyncWaitHandle});
-			if (_disposeFlag) return false;
+
+			// possible DuplicateWaitObjectException: Duplicate objects in argument. in core3.1 /net5.0 
+			if(r.AsyncWaitHandle != w.AsyncWaitHandle) 
+				WaitHandle.WaitAll(new[] { r.AsyncWaitHandle, w.AsyncWaitHandle });
+			else {
+				w.AsyncWaitHandle.WaitOne();
+			}
+			
+			if (_disposeFlag) return false; // canceled
 
 			_readPipe.EndWaitForConnection(r);
 			_writePipe.EndWaitForConnection(w);

@@ -11,13 +11,13 @@ namespace KsWare.IO.NamedPipes.Tests {
 		[TestMethod]
 		public void StartServerAndDisposeTest() {
 
-			string          pipeName = nameof(StartServerAndDisposeTest);
-			NamedPipeServer Server;
+			var pipeName = Guid.NewGuid().ToString("N");
+			NamedPipeServer server = null;
 
 			try {
-				Server = new NamedPipeServer(pipeName, 1, 1);
+				server = new NamedPipeServer(pipeName, 1, 1);
 				Thread.Sleep(500);
-				Server.Dispose();
+				server.Dispose();
 				Thread.Sleep(500);
 				Debugger.Break();
 			}
@@ -25,18 +25,18 @@ namespace KsWare.IO.NamedPipes.Tests {
 				Debug.WriteLine(ex);
 			}
 			finally {
-				Server = null;
+				server?.Dispose();
 			}
 		}
 
 		[TestMethod]
 		public void StartServer() {
 
-			string          pipeName = nameof(StartServer);
-			NamedPipeServer Server;
+			var pipeName = Guid.NewGuid().ToString("N");
+			NamedPipeServer server = null;
 
 			try {
-				Server = new NamedPipeServer(pipeName, 1, 1, (sender, messageArgs) => {
+				server = new NamedPipeServer(pipeName, 1, 1, (sender, messageArgs) => {
 					Debug.WriteLine(messageArgs.Request);
 					messageArgs.Response = "Echo";
 				});
@@ -46,10 +46,8 @@ namespace KsWare.IO.NamedPipes.Tests {
 				Debug.WriteLine(ex);
 			}
 			finally {
-				Server = null;
+				server?.Dispose();
 			}
 		}
-
-
 	}
 }

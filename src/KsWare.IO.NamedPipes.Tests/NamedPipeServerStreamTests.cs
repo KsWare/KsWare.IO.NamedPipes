@@ -13,7 +13,7 @@ namespace KsWare.IO.NamedPipes.Tests {
 
 		[TestMethod]
 		public void WaitForConnectionDisposeTest() {
-			var server = new NamedPipeServerStream("kvjslazebfnoiveh", PipeDirection.Out, 1, PipeTransmissionMode.Byte,
+			var server = new NamedPipeServerStream(Guid.NewGuid().ToString("N"), PipeDirection.Out, 1, PipeTransmissionMode.Byte,
 				PipeOptions.Asynchronous);
 			Task.Run(() => {
 				try {
@@ -32,7 +32,7 @@ namespace KsWare.IO.NamedPipes.Tests {
 
 		[TestMethod]
 		public void WaitForConnectionCloseTest() {
-			var server = new NamedPipeServerStream("kvjslazebfnoiveh", PipeDirection.Out, 1, PipeTransmissionMode.Byte,
+			var server = new NamedPipeServerStream(Guid.NewGuid().ToString("N"), PipeDirection.Out, 1, PipeTransmissionMode.Byte,
 				PipeOptions.Asynchronous);
 			Task.Run(() => {
 				try {
@@ -52,7 +52,7 @@ namespace KsWare.IO.NamedPipes.Tests {
 
 		[TestMethod]
 		public void WaitForConnectionDisconnectTest() {
-			var server = new NamedPipeServerStream("kvjslazebfnoiveh", PipeDirection.Out, 1, PipeTransmissionMode.Byte,
+			var server = new NamedPipeServerStream(Guid.NewGuid().ToString("N"), PipeDirection.Out, 1, PipeTransmissionMode.Byte,
 				PipeOptions.Asynchronous);
 			Task.Run(() => {
 				try {

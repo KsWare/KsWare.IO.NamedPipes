@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ProjectGuid>{378CAC5B-1F20-4278-A129-9A9CE5243C7C}</ProjectGuid>
-    <TargetFrameworks>net45;netcoreapp3.1;net5.0</TargetFrameworks>
+    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
     <AssemblyTitle>KsWare.IO.NamedPipes</AssemblyTitle>
     <Company>KsWare</Company>
     <Product>KsWare.IO.NamedPipes</Product>
