@@ -133,7 +133,10 @@ namespace KsWare.IO.NamedPipes.Internal {
 			Writer = new StreamWriter(writeStream);
 		}
 
-		protected const uint PIPE_UNLIMITED_INSTANCES = 255;
+		/// <summary>
+		/// PIPE_UNLIMITED_INSTANCES (255). NOTE for managed API this constant must not be used because different value is required (-1).
+		/// </summary>
+		protected const uint PIPE_UNLIMITED_INSTANCES = 255; 
 
 		protected const uint NMPWAIT_WAIT_FOREVER = 0xffffffff;
 

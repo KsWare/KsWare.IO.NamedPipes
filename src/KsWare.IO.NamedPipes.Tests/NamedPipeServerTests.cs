@@ -49,5 +49,26 @@ namespace KsWare.IO.NamedPipes.Tests {
 				server?.Dispose();
 			}
 		}
+
+		[TestMethod]
+		public void StartServerWithMaxConnections() {
+
+			var pipeName = Guid.NewGuid().ToString("N");
+			NamedPipeServer server = null;
+
+			try {
+				server = new NamedPipeServer(pipeName, -1, 1, (sender, messageArgs) => {
+					Debug.WriteLine(messageArgs.Request);
+					messageArgs.Response = "Echo";
+				});
+
+			}
+			catch (Exception ex) {
+				Debug.WriteLine(ex);
+			}
+			finally {
+				server?.Dispose();
+			}
+		}
 	}
 }
