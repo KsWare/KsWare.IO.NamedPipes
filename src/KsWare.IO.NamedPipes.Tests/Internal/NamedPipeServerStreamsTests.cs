@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.IO.Pipes;
 using System.Threading;
@@ -47,8 +48,9 @@ namespace KsWare.IO.NamedPipes.Tests.Internal {
 			var streams1 = new NamedPipeServerStreams(pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte,
 				PipeOptions.Asynchronous);
 
-			// IOException: Alle Pipeinstanzen sind ausgelastet.
-			Assert.ThrowsException<IOException>(() =>
+			// IOException: Alle Pipeinstanzen sind ausgelastet. (2018)
+			// Win32Exception: Alle Pipeinstanzen sind ausgelastet (2021)
+			Assert.ThrowsException<Win32Exception>(() =>
 				new NamedPipeServerStreams(pipeName, PipeDirection.InOut, 2, PipeTransmissionMode.Byte, PipeOptions.Asynchronous));
 
 			streams1.Dispose();
