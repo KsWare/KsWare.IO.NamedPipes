@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace KsWare.IO.NamedPipes.Tests {
 
@@ -11,6 +7,13 @@ namespace KsWare.IO.NamedPipes.Tests {
 
 		public static string CreatePipeName([CallerMemberName] string callerMemberName = null) {
 			return callerMemberName;
+		}
+
+		public static void RunMta(ThreadStart action) {
+			var t = new Thread(action);
+			t.SetApartmentState(ApartmentState.MTA);
+			t.Start();
+			t.Join();
 		}
 	}
 }
